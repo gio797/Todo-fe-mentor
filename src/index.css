@@ -141,6 +141,34 @@ body {
   border: none;
 }
 
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 15px;
+  font-size: 14px;
+}
+
+.info button {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.info button:hover {
+  color: var(--LightGrayishBluehover);
+}
+
+.active-filter {
+  color: var(--LightGrayishBluehover);
+}
+
+.info-items {
+  display: flex;
+  gap: 6px;
+}
+
 @media screen and (min-width: 500px) {
   .head-bg-dark {
     background-image: url(/src/assets/images/bg-desktop-dark.jpg);

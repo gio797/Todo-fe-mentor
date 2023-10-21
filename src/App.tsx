@@ -16,6 +16,7 @@ function App() {
   const [items, setItems] = useState<TaskType[]>(
     JSON.parse(localStorage.getItem("items") || "[]")
   );
+  const [filter, setFilter] = useState<"All" | "Active" | "Completed">("All");
 
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
@@ -67,6 +68,27 @@ function App() {
     });
   }
 
+  function deleteCompleted() {
+    setItems((prevItems) => {
+      const newItems = prevItems.filter((item) => !item.done);
+      return newItems;
+    });
+  }
+
+  const totalTasks = items.length;
+  const completed = items.filter((item) => item.done).length;
+  const notCompleted = totalTasks - completed;
+
+  // Filter the tasks based on the selected filter
+  const filteredItems = items.filter((item) => {
+    if (filter === "Active") {
+      return !item.done;
+    } else if (filter === "Completed") {
+      return item.done;
+    }
+    return true; // "All" filter, show all items
+  });
+
   return (
     <div className={darkTheme ? "app" : "app-light-bg"}>
       <div className={darkTheme ? "head-bg-dark" : "head-bg-light"}></div>
@@ -102,7 +124,7 @@ function App() {
         </form>
 
         <div className="tasks">
-          {items.map((item, index) => (
+          {filteredItems.map((item, index) => (
             <div className="task" key={item.name + index}>
               <input
                 type="checkbox"
@@ -118,6 +140,30 @@ function App() {
               </button>
             </div>
           ))}
+          <div className="info">
+            <p>{notCompleted} items left</p>
+            <div className="info-items">
+              <button
+                onClick={() => setFilter("All")}
+                className={filter === "All" ? "active-filter" : ""}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setFilter("Active")}
+                className={filter === "Active" ? "active-filter" : ""}
+              >
+                Active
+              </button>
+              <button
+                onClick={() => setFilter("Completed")}
+                className={filter === "Completed" ? "active-filter" : ""}
+              >
+                Completed
+              </button>
+            </div>
+            <button onClick={deleteCompleted}>Clear Completed</button>
+          </div>
         </div>
       </div>
     </div>
