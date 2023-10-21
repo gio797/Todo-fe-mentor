@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* colors */
+  --BrightBlue: hsl(220, 98%, 61%);
+  --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+
+  /* light theme */
+
+  --VeryLightGray: hsl(0, 0%, 98%);
+  --VeryLightGrayishBlue: hsl(236, 33%, 92%);
+  --LightGrayishBlue: hsl(233, 11%, 84%);
+  --DarkGrayishBlue: hsl(236, 9%, 61%);
+  --VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+
+  /* ### Dark Theme */
+
+  --VeryDarkBlue: hsl(235, 21%, 11%);
+  --VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+  --LightGrayishBlue: hsl(234, 39%, 85%);
+  --LightGrayishBluehover: hsl(236, 33%, 92%);
+  --DarkGrayishBlue: hsl(234, 11%, 52%);
+  --VeryDarkGrayishBlue: hsl(233, 14%, 35%);
+  --VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  color: var(--DarkGrayishBlue);
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.app {
+  background-color: var(--VeryDarkBlue);
+  height: 100vh;
+}
+
+.app-light-bg {
+  background-color: var(--VeryLightGray);
+  height: 100vh;
+}
+
+.head-bg-dark {
+  background-image: url(/src/assets/images/bg-mobile-dark.jpg);
+  height: 300px;
+  background-size: cover;
+}
+
+.head-bg-light {
+  background-image: url(/src/assets/images/bg-mobile-light.jpg);
+  height: 300px;
+  background-size: cover;
+}
+
+.main {
+  /* margin: auto; */
+  position: absolute;
+  max-width: 480px;
+  width: 100%;
+  padding: 30px;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: white;
+  letter-spacing: 12px;
+  font-size: 30px;
+}
+
+.header img {
+  width: 22px;
+}
+
+.form {
+  background-color: var(--VeryDarkDesaturatedBlue);
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.form input {
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  color: var(--DarkGrayishBlue);
+  font-size: 16px;
+}
+
+.form input:focus {
+  background-color: inherit;
+}
+
+.form button {
+  background-color: transparent;
+  border: none;
+}
+
+.tasks {
+  margin-top: 20px;
+  background-color: var(--VeryDarkDesaturatedBlue);
+  border-radius: 5px;
+}
+
+.task {
+  padding-inline: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid var(--DarkGrayishBlue);
+}
+
+.task-line-through {
+  text-decoration: line-through;
+}
+
+.task p {
+  margin-right: auto;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task button {
+  background-color: transparent;
+  border: none;
+}
+
+@media screen and (min-width: 500px) {
+  .head-bg-dark {
+    background-image: url(/src/assets/images/bg-desktop-dark.jpg);
+  }
+  .head-bg-light {
+    background-image: url(/src/assets/images/bg-desktop-light.jpg);
+  }
+}
