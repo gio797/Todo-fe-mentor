@@ -26,24 +26,27 @@
   --DarkGrayishBlue: hsl(234, 11%, 52%);
   --VeryDarkGrayishBlue: hsl(233, 14%, 35%);
   --VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+
+  /* box shadow */
+  --BoxShadow: -2px 11px 34px -1px rgba(0, 0, 0, 0.34);
+  -webkit-box-shadow: -2px 11px 34px -1px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: -2px 11px 34px -1px rgba(0, 0, 0, 0.34);
 }
 
 body {
   margin: 0;
   padding: 0;
-
   font-family: "Josefin Sans", sans-serif;
 }
 
 .app {
-  color: var(--DarkGrayishBlue);
+  color: var(--LightGrayishBlue);
   background-color: var(--VeryDarkBlue);
   height: 100vh;
 }
 
 .app-light-bg {
   color: var(--VeryDarkGrayishBlue);
-
   background-color: var(--VeryLightGrayishBlue);
   height: 100vh;
 }
@@ -97,6 +100,7 @@ body {
   gap: 10px;
   padding: 15px;
   border-radius: 5px;
+  box-shadow: var(--BoxShadow);
 }
 
 .form-light {
@@ -104,6 +108,7 @@ body {
   display: flex;
   gap: 10px;
   padding: 15px;
+  box-shadow: var(--BoxShadow);
   border-radius: 5px;
 }
 
@@ -126,36 +131,39 @@ body {
 .form-light button {
   background-color: transparent;
   border: none;
+  padding: 0;
 }
 
 .tasks {
   margin-top: 20px;
   background-color: var(--VeryDarkDesaturatedBlue);
   border-radius: 5px;
+  box-shadow: var(--BoxShadow);
 }
 
 .tasks-light {
   margin-top: 20px;
   background-color: var(--VeryLightGray);
   border-radius: 5px;
+  box-shadow: var(--BoxShadow);
 }
 
 .task {
-  padding-inline: 15px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
   border-bottom: 1px solid var(--DarkGrayishBlue);
+  font-size: 18px;
 }
-
-/* custom input */
 
 .task-line-through {
   text-decoration: line-through;
   opacity: 0.5;
 }
 
-.task p {
+.task label {
   margin-right: auto;
 }
 
@@ -172,15 +180,14 @@ body {
 .info {
   display: flex;
   justify-content: space-between;
-  padding-inline: 15px;
-  font-size: 14px;
+  padding: 6px 15px;
 }
 
 .info-btn,
 .info-btn-light {
   background-color: inherit;
   border: none;
-  /* color: inherit; */
+  font-size: 16px;
   font-family: inherit;
   cursor: pointer;
 }
@@ -202,8 +209,67 @@ body {
 }
 
 .info-items {
+  margin-top: 20px;
+  background-color: var(--VeryDarkDesaturatedBlue);
   display: flex;
-  gap: 6px;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: var(--BoxShadow);
+}
+
+.info-items-light {
+  margin-top: 20px;
+  background-color: var(--VeryLightGray);
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: var(--BoxShadow);
+}
+
+/* Hide the default checkbox input */
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the custom checkbox container */
+.custom-checkbox .checkmark {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  background-color: inherit;
+  margin-right: 10px;
+  /* border-radius: 3px; */
+}
+
+/* Style the custom checkbox itself when checked */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::before {
+  content: "\2713"; /* Checkmark character */
+  position: absolute;
+  top: -2px;
+  left: 3px;
+
+  font-size: 16px;
+  color: gray;
+}
+
+/* Style the label text */
+.custom-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Change the appearance of the custom checkbox when hovered */
+.custom-checkbox label:hover .checkmark {
+  background-color: #f0f0f0;
 }
 
 @media screen and (min-width: 500px) {

@@ -115,7 +115,7 @@ function App() {
               height="20"
             >
               <path
-                fill="hsl(234, 39%, 85%)"
+                fill="gray"
                 d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"
               />
             </svg>
@@ -133,16 +133,25 @@ function App() {
         <div className={darkTheme ? "tasks" : "tasks-light"}>
           {filteredItems.map((item, index) => (
             <div className="task" key={item.name + index}>
-              <input
-                type="checkbox"
-                name="item"
-                checked={item.done}
-                onChange={() => handleCheckboxChange(index)}
-              />
+              <label
+                htmlFor={item.name}
+                className={
+                  item.done
+                    ? "custom-checkbox task-line-through"
+                    : "custom-checkbox"
+                }
+              >
+                <input
+                  type="checkbox"
+                  id={item.name}
+                  checked={item.done}
+                  onChange={() => handleCheckboxChange(index)}
+                />
+                <span className="checkmark"></span>
 
-              <p className={item.done ? "task-line-through" : ""}>
                 {item.name}
-              </p>
+              </label>
+
               <button onClick={() => handleDelete(index)}>
                 <img src={cross} alt="" />
               </button>
@@ -150,39 +159,7 @@ function App() {
           ))}
           <div className="info">
             <p className="info-items-color">{notCompleted} items left</p>
-            <div className="info-items">
-              <button
-                onClick={() => setFilter("All")}
-                className={`
-                  ${filter === "All" ? "active-filter" : "info-items-color"}
-                  ${darkTheme ? "info-btn" : "info-btn-light"}
-                `}
-              >
-                All
-              </button>
-              <button
-                onClick={() => setFilter("Active")}
-                className={`
-                  ${filter === "Active" ? "active-filter" : "info-items-color"}
-                  ${darkTheme ? "info-btn" : "info-btn-light"}
-                `}
-              >
-                Active
-              </button>
-              <button
-                onClick={() => setFilter("Completed")}
-                className={`
-                  ${
-                    filter === "Completed"
-                      ? "active-filter"
-                      : "info-items-color"
-                  }
-                  ${darkTheme ? "info-btn" : "info-btn-light"}
-                `}
-              >
-                Completed
-              </button>
-            </div>
+
             <button
               onClick={deleteCompleted}
               className={`info-items-color ${
@@ -192,6 +169,39 @@ function App() {
               Clear Completed
             </button>
           </div>
+        </div>
+        <div className={darkTheme ? "info-items" : "info-items-light"}>
+          <button
+            onClick={() => setFilter("All")}
+            className={`
+                  ${filter === "All" ? "active-filter" : "info-items-color"}
+                  ${darkTheme ? "info-btn" : "info-btn-light"}
+                `}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setFilter("Active")}
+            className={`
+                  ${filter === "Active" ? "active-filter" : "info-items-color"}
+                  ${darkTheme ? "info-btn" : "info-btn-light"}
+                `}
+          >
+            Active
+          </button>
+          <button
+            onClick={() => setFilter("Completed")}
+            className={`
+                  ${
+                    filter === "Completed"
+                      ? "active-filter"
+                      : "info-items-color"
+                  }
+                  ${darkTheme ? "info-btn" : "info-btn-light"}
+                `}
+          >
+            Completed
+          </button>
         </div>
       </div>
     </div>
