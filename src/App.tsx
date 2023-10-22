@@ -96,10 +96,17 @@ function App() {
         <div className="header">
           <h1>TODO</h1>
           <div onClick={() => setDarkTheme((prev) => !prev)}>
-            <img src={darkTheme ? sun : moon} alt="" />
+            <img
+              src={darkTheme ? sun : moon}
+              alt="theme switcher"
+              className="theme-image"
+            />
           </div>
         </div>
-        <form className="form" onSubmit={handleSubmit}>
+        <form
+          className={darkTheme ? "form" : "form-light"}
+          onSubmit={handleSubmit}
+        >
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +130,7 @@ function App() {
           />
         </form>
 
-        <div className="tasks">
+        <div className={darkTheme ? "tasks" : "tasks-light"}>
           {filteredItems.map((item, index) => (
             <div className="task" key={item.name + index}>
               <input
@@ -132,6 +139,7 @@ function App() {
                 checked={item.done}
                 onChange={() => handleCheckboxChange(index)}
               />
+
               <p className={item.done ? "task-line-through" : ""}>
                 {item.name}
               </p>
@@ -141,28 +149,48 @@ function App() {
             </div>
           ))}
           <div className="info">
-            <p>{notCompleted} items left</p>
+            <p className="info-items-color">{notCompleted} items left</p>
             <div className="info-items">
               <button
                 onClick={() => setFilter("All")}
-                className={filter === "All" ? "active-filter" : ""}
+                className={`
+                  ${filter === "All" ? "active-filter" : "info-items-color"}
+                  ${darkTheme ? "info-btn" : "info-btn-light"}
+                `}
               >
                 All
               </button>
               <button
                 onClick={() => setFilter("Active")}
-                className={filter === "Active" ? "active-filter" : ""}
+                className={`
+                  ${filter === "Active" ? "active-filter" : "info-items-color"}
+                  ${darkTheme ? "info-btn" : "info-btn-light"}
+                `}
               >
                 Active
               </button>
               <button
                 onClick={() => setFilter("Completed")}
-                className={filter === "Completed" ? "active-filter" : ""}
+                className={`
+                  ${
+                    filter === "Completed"
+                      ? "active-filter"
+                      : "info-items-color"
+                  }
+                  ${darkTheme ? "info-btn" : "info-btn-light"}
+                `}
               >
                 Completed
               </button>
             </div>
-            <button onClick={deleteCompleted}>Clear Completed</button>
+            <button
+              onClick={deleteCompleted}
+              className={`info-items-color ${
+                darkTheme ? "info-btn" : "info-btn-light"
+              }`}
+            >
+              Clear Completed
+            </button>
           </div>
         </div>
       </div>

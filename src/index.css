@@ -32,17 +32,19 @@ body {
   margin: 0;
   padding: 0;
 
-  color: var(--DarkGrayishBlue);
   font-family: "Josefin Sans", sans-serif;
 }
 
 .app {
+  color: var(--DarkGrayishBlue);
   background-color: var(--VeryDarkBlue);
   height: 100vh;
 }
 
 .app-light-bg {
-  background-color: var(--VeryLightGray);
+  color: var(--VeryDarkGrayishBlue);
+
+  background-color: var(--VeryLightGrayishBlue);
   height: 100vh;
 }
 
@@ -76,9 +78,13 @@ body {
 }
 
 .header h1 {
-  color: white;
+  color: var(--VeryLightGray);
   letter-spacing: 12px;
   font-size: 30px;
+}
+
+.theme-image {
+  cursor: pointer;
 }
 
 .header img {
@@ -93,19 +99,31 @@ body {
   border-radius: 5px;
 }
 
-.form input {
+.form-light {
+  background-color: var(--VeryLightGray);
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.form input,
+.form-light input {
   background-color: transparent;
   border: none;
   font-family: inherit;
-  color: var(--DarkGrayishBlue);
+  color: inherit;
   font-size: 16px;
 }
 
-.form input:focus {
+.form input:focus,
+.form-light input:focus {
   background-color: inherit;
+  outline: none;
 }
 
-.form button {
+.form button,
+.form-light button {
   background-color: transparent;
   border: none;
 }
@@ -113,6 +131,12 @@ body {
 .tasks {
   margin-top: 20px;
   background-color: var(--VeryDarkDesaturatedBlue);
+  border-radius: 5px;
+}
+
+.tasks-light {
+  margin-top: 20px;
+  background-color: var(--VeryLightGray);
   border-radius: 5px;
 }
 
@@ -124,8 +148,11 @@ body {
   border-bottom: 1px solid var(--DarkGrayishBlue);
 }
 
+/* custom input */
+
 .task-line-through {
   text-decoration: line-through;
+  opacity: 0.5;
 }
 
 .task p {
@@ -139,6 +166,7 @@ body {
 .task button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .info {
@@ -148,20 +176,29 @@ body {
   font-size: 14px;
 }
 
-.info button {
+.info-btn,
+.info-btn-light {
   background-color: inherit;
   border: none;
-  color: inherit;
+  /* color: inherit; */
   font-family: inherit;
   cursor: pointer;
 }
 
-.info button:hover {
+.info-btn:hover {
   color: var(--LightGrayishBluehover);
 }
 
+.info-btn-light:hover {
+  color: var(--VeryDarkGrayishBlue);
+}
+
+.info-items-color {
+  color: var(--DarkGrayishBlue);
+}
+
 .active-filter {
-  color: var(--LightGrayishBluehover);
+  color: var(--BrightBlue);
 }
 
 .info-items {
