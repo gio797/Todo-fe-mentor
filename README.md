@@ -11,3 +11,5 @@ Users are be able to:
 - Clear all completed todos
 - Toggle light and dark mode
 - **Bonus**: Drag and drop to reorder items on the list
+
+![app screenshot](./public/fe-todo.png)
