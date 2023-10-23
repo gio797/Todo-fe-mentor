@@ -157,7 +157,7 @@ function App() {
         >
           {filteredItems.map((item, index) => (
             <div
-              className="task"
+              className={`task ${dragging === index ? "dragging" : ""}`}
               key={item.name + index}
               draggable={true}
               onDragStart={(e) => handleDragStart(e, index)}
