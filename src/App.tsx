@@ -18,23 +18,12 @@ function App() {
   );
   const [filter, setFilter] = useState<"All" | "Active" | "Completed">("All");
 
+  const [dragging, setDragging] = useState<number | null>(null); // Track the index of the dragging item
+  const [dragOver, setDragOver] = useState<number | null>(null); // Track the index of the item being dragged over
+
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
-
-  // useEffect(() => {
-  //   if (!darkTheme) {
-  //     document.body.style.backgroundColor = "hsl(0, 0%, 98%)";
-  //   } else document.body.style.backgroundColor = "hsl(235, 21%, 11%)";
-  // }, [darkTheme]);
-
-  // useEffect(() => {
-  //   // Retrieve data from localStorage when the component mounts
-  //   const storedItems = localStorage.getItem("items");
-  //   if (storedItems) {
-  //     setItems(JSON.parse(storedItems));
-  //   }
-  // }, []); // The empty dependency array ensures this effect runs only once on mount
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setItem(e.target.value);
@@ -79,15 +68,45 @@ function App() {
   const completed = items.filter((item) => item.done).length;
   const notCompleted = totalTasks - completed;
 
-  // Filter the tasks based on the selected filter
   const filteredItems = items.filter((item) => {
     if (filter === "Active") {
       return !item.done;
     } else if (filter === "Completed") {
       return item.done;
     }
-    return true; // "All" filter, show all items
+    return true;
   });
+
+  function handleDragStart(e: React.DragEvent, index: number) {
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", index.toString());
+    setDragging(index);
+  }
+
+  function handleDragOver(e: React.DragEvent, index: number) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragOver(index);
+  }
+
+  function handleDragEnd() {
+    setDragOver(null);
+    setDragging(null);
+  }
+
+  function handleDrop(e: React.DragEvent, toIndex: number) {
+    e.preventDefault();
+    const fromIndex = parseInt(e.dataTransfer.getData("text/html"));
+    if (fromIndex !== toIndex) {
+      setItems((prevItems) => {
+        const newItems = [...prevItems];
+        const [movedItem] = newItems.splice(fromIndex, 1);
+        newItems.splice(toIndex, 0, movedItem);
+        return newItems;
+      });
+    }
+    setDragOver(null);
+  }
 
   return (
     <div className={darkTheme ? "app" : "app-light-bg"}>
@@ -130,9 +149,21 @@ function App() {
           />
         </form>
 
-        <div className={darkTheme ? "tasks" : "tasks-light"}>
+        <div
+          className={darkTheme ? "tasks" : "tasks-light"}
+          onDrop={(e) => handleDrop(e, dragOver as number)}
+          onDragEnter={(e) => e.preventDefault()}
+          onDragOver={(e) => e.preventDefault()}
+        >
           {filteredItems.map((item, index) => (
-            <div className="task" key={item.name + index}>
+            <div
+              className="task"
+              key={item.name + index}
+              draggable={true}
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragEnd={handleDragEnd}
+            >
               <label
                 htmlFor={item.name}
                 className={

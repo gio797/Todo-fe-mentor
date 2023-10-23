@@ -64,7 +64,6 @@ body {
 }
 
 .main {
-  /* margin: auto; */
   position: absolute;
   max-width: 480px;
   width: 100%;
